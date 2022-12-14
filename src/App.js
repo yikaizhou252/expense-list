@@ -33,9 +33,9 @@ function App() {
     return expenses.map((item) => {
       return (
         <ExpenseItem
-          expenseTitle={item.title}
-          expenseAmount={item.amount}
-          expenseDate={item.date}
+          title={item.title}
+          amount={item.amount}
+          date={item.date}
           key={item.id}
         />
       );
