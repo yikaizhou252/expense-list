@@ -3,57 +3,67 @@ import { useState } from "react";
 
 // self closing tag <input />
 const ExpenseForm = () => {
-  // const [title, setTitle] = useState("");
-  // const [amount, setAmount] = useState("");
-  // const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
 
   // use this to group a bunch of states together
-  const [userInput, setUserInput] = useState({
-    title: "",
-    amount: "",
-    date: new Date().toISOString().slice(0, 10),
-  });
+  // const [userInput, setUserInput] = useState({
+  //   title: "",
+  //   amount: "",
+  //   date: new Date().toISOString().slice(0, 10),
+  // });
 
   const titleChangeHandler = (event) => {
-    setUserInput({
-      ...userInput,
-      title: event.target.value,
-    });
+    setTitle(event.target.value);
   };
-
   const amountChangeHandler = (event) => {
     // event.target.value always returns a string
     // nums stored as string
-    setUserInput({
-      ...userInput,
-      amount: event.target.value,
-    });
+    setAmount(event.target.value);
   };
-
   const dateChangeHandler = (event) => {
-    setUserInput({
-      ...userInput,
-      date: event.target.value,
-    });
+    setDate(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  // const titleChangeHandler = (event) => {
+  //   // setUserInput({
+  //   //   ...userInput,
+  //   //   title: event.target.value,
+  //   // });
+  //   setUserInput((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       title: event.target.value,
+  //     };
+  //   });
+  // };
+
+  const submitHandler = (event) => {
     event.preventDefault();
-    console.log("Yoo", userInput.title, userInput.amount, userInput.date);
-    event.target.reset();
-    // setTitle('');
-    // setAmount(null);
-    // setDate(new Date().toISOString().slice(0, 10));
+    const expenseData = {
+      title,
+      amount,
+      date: new Date(date), //when using event.target, date is saved as string
+    };
+
+    console.log(expenseData);
+
+    //event.target.reset();
+    
+    setTitle('');
+    setAmount('');
+    setDate(new Date().toISOString().slice(0, 10));
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
           <input
             type="text"
-            defaultValue={userInput.title}
+            value={title}
             onChange={titleChangeHandler}
           />
         </div>
@@ -61,6 +71,7 @@ const ExpenseForm = () => {
           <label>Amount</label>
           <input
             type="number"
+            value={amount}
             min="0.01"
             step="0.01"
             onChange={amountChangeHandler}
@@ -72,7 +83,7 @@ const ExpenseForm = () => {
             type="date"
             min="2022-01-01"
             max="2026-12-31"
-            defaultValue={userInput.date}
+            value={date}
             onChange={dateChangeHandler}
           />
         </div>
