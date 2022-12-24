@@ -1,6 +1,8 @@
-import ExpenseItem from "./components/ExpenseItem";
+import React from "react";
+import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
 
-function App() {
+const App = () => {
   // regular javascript:
   // imperative
   // const para = document.createElement('p');
@@ -29,25 +31,22 @@ function App() {
     },
   ];
 
-  const renderItems = () => {
-    return expenses.map((item) => {
-      return (
-        <ExpenseItem
-          title={item.title}
-          amount={item.amount}
-          date={item.date}
-          key={item.id}
-        />
-      );
-    });
-  };
-
   return (
     <div>
       <h2>Let's get started!</h2>
-      {renderItems()}
+      <NewExpense />
+      <Expenses className="items" expenses={expenses} />
     </div>
   );
-}
+
+  // React code without JSX ... yikes
+  // this does the same thing as the return statement from above
+  // return React.createElement(
+  //   "div",
+  //   {},
+  //   React.createElement("h2", {}, "Let's get started!"),
+  //   React.createElement(Expenses, { className: "items", expenses: expenses })
+  // );
+};
 
 export default App;
