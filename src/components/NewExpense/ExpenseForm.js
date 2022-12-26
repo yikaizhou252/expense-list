@@ -2,7 +2,7 @@ import "./ExpenseForm.css";
 import { useState } from "react";
 
 // self closing tag <input />
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
@@ -47,10 +47,8 @@ const ExpenseForm = () => {
       date: new Date(date), //when using event.target, date is saved as string
     };
 
-    console.log(expenseData);
-
-    //event.target.reset();
-    
+    //event.target.reset();  
+    props.onSaveExpenseData(expenseData);
     setTitle('');
     setAmount('');
     setDate(new Date().toISOString().slice(0, 10));

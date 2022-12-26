@@ -9,6 +9,12 @@ const App = () => {
   // para.textContent = "This is regular HTLM";
   // document.getElementById('root').append(para);
   // react: declarative
+
+  const addExpenseHandler = (expense) => {
+    console.log("In app.js");
+    console.log(expense);
+  };
+
   const expenses = [
     {
       id: "e1",
@@ -34,7 +40,7 @@ const App = () => {
   return (
     <div>
       <h2>Let's get started!</h2>
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses className="items" expenses={expenses} />
     </div>
   );
